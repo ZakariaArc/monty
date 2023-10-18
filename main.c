@@ -1,66 +1,39 @@
 #include "monty.h"
-/**
- * process_instruction - it process a single instruction
- * @file: the file pointer
- * @stack: the stack
- * @line_number: the current line number
- * Return: 0 if successful, -1 otherwise
- */
-
-int process_instruction(FILE *file, stack_t **stack, int *line_number)
-{
-	char opcode[100];
-	int arg;
-
-	if (fscanf(file, "%99s", opcode) == EOF)
-		return (-1);
-	if (strcmp(opcode, "push") == 0)
-	{
-		if (fscanf(file, "%d", &arg) != 1)
-		{
-			fprintf(stderr, "L%d: usage: push integer\n", *line_number);
-			return (-1);
-		}
-		push(stack, arg);
-	}
-	else if (strcmp(opcode, "pall") == 0)
-	{
-		pall(stack, *line_number);
-	}
-	else
-	{
-		fprintf(stderr, "L%d: unknown instruction %s\n", *line_number, opcode);
-		return (-1);
-	}
-	return (0);
-}
+bus_t bus = {NULL, NULL, NULL, 0};
 
 /**
- * main - the entry point of the program
- * @argc: the number of command-line arguments
- * @argv: an array containing the command-line arguments
- * Return: always 0
- */
+ * main - the monty code interpreter
+ * @argc: the number of arguments
+ * @argv: the monty file location
+ * Return: 0 (success)
+*/
 
 int main(int argc, char *argv[])
 {
-	FILE *file;
-	stack_t *stack = NULL;
-	int line_number = 1;
+    stack_t *stack = NULL;
+    char content[1000];
+    FILE *file;
+    unsigned int counter = 0;
 
-	if (argc != 2)
-	{
-		fprintf(stderr, "USAGE: monty file\n");
-		return (EXIT_FAILURE);
-	}
-	file = fopen(argv[1], "r");
-	if (!file)
-	{
-		fprintf(stderr, "Error: Can't open file %s\n", argv[1]);
-		return (EXIT_FAILURE);
-	}
-	while (process_instruction(file, &stack, &line_number) == 0)
-		line_number++;
-	fclose(file);
-	return (0);
+    if (argc != 2)
+    {
+        fprintf(stderr, "USAGE: monty file\n");
+        exit(EXIT_FAILURE);
+    }
+    file = fopen(argv[1], "r");
+    bus.file = file;
+    if (!file)
+    {
+        fprintf(stderr, "Error: Can't open file %s\n", argv[1]);
+        exit(EXIT_FAILURE);
+    }
+    while (fgets(content, sizeof(content), file) != NULL)
+    {
+        bus.content = content;
+        counter++;
+        execute(content, &stack, counter, file);
+    }
+    stack_free(stack);
+    fclose(file);
+    return (0);
 }
