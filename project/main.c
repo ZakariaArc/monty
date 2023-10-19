@@ -14,7 +14,7 @@ int main(int argc, char *argv[])
 	stack_t *stack = NULL;
 	char content[1000];
 	FILE *file;
-	unsigned int counter = 0;
+	int counter = 0;
 
 	if (argc != 2)
 	{
