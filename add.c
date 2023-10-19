@@ -1,9 +1,9 @@
 #include "monty.h"
+
 /**
  * add - adds the top two elements of the stack
  * @head: a pointer to the head of the stack
  * @counter: the current line number
- * Return: nothing
 */
 
 void add(stack_t **head, unsigned int counter)
