@@ -82,5 +82,5 @@ void stack_op(stack_t **head, unsigned int counter);
 void swap(stack_t **head, unsigned int counter);
 void add(stack_t **head, unsigned int counter);
 void rotr(stack_t **head, __attribute__((unused)) unsigned int counter);
-
+void bus_struct(bus_t *bus);
 #endif
