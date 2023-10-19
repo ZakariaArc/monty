@@ -1,9 +1,8 @@
 #include "monty.h"
 /**
- * divi - it divides the top two elements of the stack
+ * divi - divides the top two elements of the stack
  * @head: a pointer to the head of the stack
  * @counter: the current line number
- * Return: nothing
 */
 
 void divi(stack_t **head, unsigned int counter)

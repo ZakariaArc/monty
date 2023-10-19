@@ -3,7 +3,6 @@
  * nodeadd - adds a node to the head of the stack
  * @head: a pointer to the head of the stack
  * @n: the new value
- * Return: nothing
  */
 
 void nodeadd(stack_t **head, int n)

@@ -58,8 +58,6 @@ typedef struct instruction_s
 	void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
-void bus_struct(bus_t *bus);
-
 void queueadd(stack_t **head, int n);
 int execute(char *content, stack_t **head, unsigned int counter, FILE *file);
 void mod(stack_t **head, unsigned int counter);

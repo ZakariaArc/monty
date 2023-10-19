@@ -1,10 +1,9 @@
 #include "monty.h"
 /**
- * mod - it computes the rest of the division of the second
+ * mod - computes the rest of the division of the second
  *       top element of the stack by the top element of the stack
  * @head: a pointer to the head of the stack
  * @counter: the current line number
- * Return: nothing
 */
 
 void mod(stack_t **head, unsigned int counter)
